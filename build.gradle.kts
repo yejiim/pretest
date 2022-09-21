@@ -4,6 +4,7 @@ plugins {
     val kotlinVersion = "1.5.21"
     id("org.springframework.boot") version "2.5.4"
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
+    id("com.github.johnrengelman.shadow") version "6.0.0"
 
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
@@ -56,6 +57,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = "com.pretest.kakaobank.KakaobankApplicationKt"
 }
 
 repositories {
