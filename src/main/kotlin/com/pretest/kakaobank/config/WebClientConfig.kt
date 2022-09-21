@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.pretest.kakaobank.PretestConstants.Companion.TIME_FORMAT
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
@@ -31,7 +32,6 @@ class WebClientConfig {
 
     @Bean
     fun objectMapper(): ObjectMapper {
-        val TIME_FORMAT = "[yyyy]-[MM]-[dd]'T'[HH]:[mm]:[ss].[SSS][z]"
 
         return ObjectMapper().registerModules(
             KotlinModule(),
@@ -39,7 +39,7 @@ class WebClientConfig {
                 ZonedDateTime::class.java,
                 ZonedDateTimeSerializer(DateTimeFormatter.ofPattern(TIME_FORMAT))
             ),
-            SimpleModule().addDeserializer(ZonedDateTime::class.java, ZonedDateTimeDeserializer(TIME_FORMAT))
+            SimpleModule().addDeserializer(ZonedDateTime::class.java, ZonedDateTimeDeserializer())
         )
 
     }

@@ -16,7 +16,6 @@ data class TrendingKeywordsResponse(
     }
 }
 
-//FIXME change to a better name
 data class QueryCountModel(
     val query: String,
     val count: Int

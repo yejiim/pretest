@@ -14,13 +14,11 @@ class SearchService(
     private val searchEngineGateway: SearchEngineGateway,
     private val repository: SearchRepository
 ) {
-    //FIXME 이걸 aspect로? 여튼 좀 더 좋은 방법으로..
     fun blogSearch(request: SearchRequest): SearchResponse {
         updateKeyword(request.query)
         return searchEngineGateway.getSearchEngine().blogSearch(request)
     }
 
-    // TODO view table 단순 조회
     fun trending(): TrendingKeywordsResponse? {
         return TrendingKeywordsResponse.of(repository.getTrendingQueries())
     }
