@@ -18,6 +18,7 @@ class SearchController(
      */
     @GetMapping("blog")
     fun searchBlog(request: SearchRequest): SearchResponse {
+        request.validate()
         return searchService.blogSearch(request)
     }
 
